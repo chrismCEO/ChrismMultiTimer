@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.chrismsolutions.chrismmultitimer.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:orientation="vertical">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list"
+        android:dividerHeight="2dp"
+        android:divider="@color/colorPrimaryLight"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:text="@string/empty_view_text"
+        android:textSize="24sp"
+        android:id="@+id/empty_view"
+        android:textColor="@color/colorSecondaryText"
+        android:drawableTop="@mipmap/multitimer_512_official"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
