@@ -72,6 +72,10 @@ public class MultiTimer implements Serializable
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
+    /**
+     * Show the time as a string as hours:minutes:seconds
+     * @return
+     */
     public String toString()
     {
         int hours, minutes, seconds;
@@ -93,6 +97,11 @@ public class MultiTimer implements Serializable
         return text;
     }
 
+    /**
+     * Convert milliseconds to hours, minutes and seconds
+     * @param millis
+     * @return int[] with hours in position 0, minutes in position 1 and seconds in position 2
+     */
     public static int[] convertMillisToTime(long millis)
     {
         int hours = (int)TimeUnit.MILLISECONDS.toHours(millis);
@@ -105,6 +114,11 @@ public class MultiTimer implements Serializable
         return new int[]{hours, minutes, seconds};
     }
 
+    /**
+     * User has changed the timer clock, only change the time remaining if the timer
+     * hasn't started
+     * @param timerClock
+     */
     public void setTimerClock(long timerClock)
     {
         this.timerClock = timerClock;
@@ -187,6 +201,9 @@ public class MultiTimer implements Serializable
         return countUp;
     }
 
+    /**
+     * Start the timer as a background thread
+     */
     void start()
     {
         started = true;
@@ -204,6 +221,9 @@ public class MultiTimer implements Serializable
 
     }
 
+    /**
+     * Update the remaining time, either subtracting or adding to it
+     */
     private Runnable countdownTask = new Runnable() {
         @Override
         public void run() {
@@ -232,6 +252,10 @@ public class MultiTimer implements Serializable
         }
     };
 
+    /**
+     * Show the timer with the least amount of time remaining as a notification.
+     * This should open the app if clicked on
+     */
     private void showOngoingNotification()
     {
         if (showOngoingNotification && timerClockRemaining != 0)
@@ -275,12 +299,18 @@ public class MultiTimer implements Serializable
         }
     }
 
+    /**
+     * The timer is done, no need to show this timer in the notification anymore
+     */
     public void cancelOngoingNotification()
     {
         showOngoingNotification = false;
         notificationManager.cancel(NOTIFICATION_ID_ONGOING);
     }
 
+    /**
+     * Creates the alarm notification, showing that a timer is done
+     */
     private void showNotification()
     {
         Notification.Builder builder = new Notification.Builder(mContext)
@@ -315,6 +345,7 @@ public class MultiTimer implements Serializable
                 notificationManagerLocal.notify();
             }
 
+            //Only sound the alarm for 30 seconds
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -327,6 +358,9 @@ public class MultiTimer implements Serializable
         }
     }
 
+    /**
+     * The alarm has been stopped by the user, stop sounding it
+     */
     public void stopRingtone()
     {
         NotificationManager notificationManager =
@@ -336,6 +370,9 @@ public class MultiTimer implements Serializable
         cancelOngoingNotification();
     }
 
+    /**
+     * The user has paused the timer
+     */
     public void pause()
     {
         started = false;

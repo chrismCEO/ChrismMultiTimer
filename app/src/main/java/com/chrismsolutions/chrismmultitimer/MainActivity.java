@@ -82,7 +82,7 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
             }
         });
 
-        timerListView = (ListView) findViewById(R.id.list);
+        timerListView = findViewById(R.id.list);
         timerListView.setEmptyView(findViewById(R.id.empty_view));
 
         multiTimerAdapter = new MultiTimerArrayAdapter(this, new ArrayList<MultiTimer>());
@@ -113,17 +113,19 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
 
     public void changeDesign()
     {
-        //There's been a change in ownership, change the layout
+        //There's been a possible change in ownership, change the layout
         RelativeLayout relativeLayout = findViewById(R.id.relative_layout_main);
         adHelper.createAd(relativeLayout);
 
         removeAdMenuItem.setVisible(adHelper.showAd());
     }
 
-
+    /**
+     * Set the @adHelper object if we show ads or need to check ownership
+     */
     private void setContentViewAds()
     {
-        //Show ads if user has not payed to suppress them
+        //Show ads if user has not payed to remove them
         if (getIntent() != null && getIntent().hasExtra(ChrismAdHelper.IS_PREMIUM_USER))
         {
             showAds = !getIntent().getBooleanExtra(ChrismAdHelper.IS_PREMIUM_USER, true);
@@ -152,7 +154,7 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        removeAdMenuItem = (MenuItem) menu.findItem(R.id.remove_ads);
+        removeAdMenuItem = menu.findItem(R.id.remove_ads);
         removeAdMenuItem.setVisible(adHelper.showAd());
 
         return true;
@@ -180,6 +182,10 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
         return result && super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Get all relevant timers from the database, which have show = 1
+     * @return
+     */
     private Cursor queryMultiTimerDB()
     {
         String[] projection = {
@@ -210,6 +216,11 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
     }
 
 
+    /**
+     * Keep a list of all the timers shown, and add/remove timers based on user action
+     * @param loader
+     * @param multiTimers
+     */
     @Override
     public void onLoadFinished(Loader<List<MultiTimer>> loader, List<MultiTimer> multiTimers)
     {

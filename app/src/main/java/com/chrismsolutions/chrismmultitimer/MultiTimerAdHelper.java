@@ -23,6 +23,11 @@ public class MultiTimerAdHelper extends ChrismAdHelper
         super(context, initHelper, callback);
     }
 
+    /**
+     * Set the correct layout based on whether ads are shown or not
+     * @param view
+     * @return
+     */
     @Override
     public AdView createAppSpecificAd(RelativeLayout view)
     {

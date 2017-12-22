@@ -298,7 +298,11 @@ public class MultiTimerArrayAdapter extends ArrayAdapter<MultiTimer>
             updateTime();
         }
 
-
+        /**
+         * We have a user response, either do an action and change the image(s) or change the
+         * image(s) on each tick if there's a reason for it
+         * @param onlyChangeImage
+         */
         public void setImagePlayPaused(boolean onlyChangeImage)
         {
             boolean started = timer.getStarted();

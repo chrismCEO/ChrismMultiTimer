@@ -23,7 +23,7 @@ public class ChrismAdHelper implements Serializable
     private static final int REQUEST_CODE = 10001;
     private static final String LOG_TAG = ChrismAdHelper.class.getName();
     public static final String ADHELPER_CLASS = LOG_TAG;
-    private static boolean TEST_UNIT = false;
+    private static boolean TEST_UNIT = true;
     public Context mContext;
     private IabHelper mHelper;
     private boolean mCallback;
@@ -69,12 +69,12 @@ public class ChrismAdHelper implements Serializable
                 else
                 {
                     mHelperSetup = true;
-                    try {
+                    /*try {
                         mHelper.queryInventoryAsync(mInventoryListener);
 
                     } catch (IabHelper.IabAsyncInProgressException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
             }
         });
@@ -118,6 +118,11 @@ public class ChrismAdHelper implements Serializable
         }
     }
 
+    /**
+     * Overrun this method for each app, as there can be different layout ID's
+     * @param view
+     * @return
+     */
     public AdView createAppSpecificAd(RelativeLayout view)
     {
         return null;

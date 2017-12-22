@@ -32,25 +32,31 @@ public class MultiTimerHiddenCursorAdapter extends CursorAdapter
         return LayoutInflater.from(context).inflate(R.layout.list_item_hidden_timers, parent, false);
     }
 
+    /**
+     * Set the data for the hidden timers and see if the user checks them or not
+     * @param view
+     * @param context
+     * @param cursor
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor)
     {
-        TextView timerName = (TextView) view.findViewById(R.id.hidden_timer_name);
+        TextView timerName = view.findViewById(R.id.hidden_timer_name);
         final String name = cursor.getString(cursor.getColumnIndexOrThrow(MultiTimerEntry.COLUMN_TIMER_NAME));
         timerName.setText(name);
 
-        TextView timerClock = (TextView) view.findViewById(R.id.hidden_timer_clock);
+        TextView timerClock = view.findViewById(R.id.hidden_timer_clock);
         int clockMillis = cursor.getInt(cursor.getColumnIndexOrThrow(MultiTimerEntry.COLUMN_TIMER_CLOCK));
         String info = cursor.getString(cursor.getColumnIndexOrThrow(MultiTimerEntry.COLUMN_TIMER_INFO));
         final String clockString = new MultiTimer(name, info, clockMillis, context, 0).toString();
         timerClock.setText(clockString);
 
-        TextView timerId = (TextView) view.findViewById(R.id.hidden_timer_id);
+        TextView timerId = view.findViewById(R.id.hidden_timer_id);
         final int id = cursor.getInt(cursor.getColumnIndexOrThrow(MultiTimerEntry._ID));
         timerId.setText(String.valueOf(id));
 
         checkStates.put(id, false);
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.hidden_timer_checkbox);
+        final CheckBox checkBox = view.findViewById(R.id.hidden_timer_checkbox);
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +71,6 @@ public class MultiTimerHiddenCursorAdapter extends CursorAdapter
                 checkStates.put(id, checkBox.isChecked());
             }
         });
-
     }
 
     public boolean getChecked(int id)
