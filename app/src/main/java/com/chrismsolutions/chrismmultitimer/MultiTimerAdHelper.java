@@ -84,9 +84,9 @@ public class MultiTimerAdHelper extends ChrismAdHelper
                 //Remove the rule so that the list can be shown without the ad
                 layoutParams.removeRule(RelativeLayout.BELOW);
             }
+            layoutParams.topMargin = marginTop;
         }
         linearLayout.setLayoutParams(layoutParams);
-        layoutParams.topMargin = marginTop;
 
         return mAdView;
     }

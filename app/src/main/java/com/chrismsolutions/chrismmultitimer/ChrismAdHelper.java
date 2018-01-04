@@ -23,7 +23,7 @@ public class ChrismAdHelper implements Serializable
     private static final int REQUEST_CODE = 10001;
     private static final String LOG_TAG = ChrismAdHelper.class.getName();
     public static final String ADHELPER_CLASS = LOG_TAG;
-    private static boolean TEST_UNIT = true;
+    private static boolean TEST_UNIT = false;
     public Context mContext;
     private IabHelper mHelper;
     private boolean mCallback;
@@ -39,7 +39,7 @@ public class ChrismAdHelper implements Serializable
 
         if (isTestDevice())
         {
-            SKU_IN_APP_PURCHASE = mContext.getString(R.string.premium_product_id_test_canceled);
+            SKU_IN_APP_PURCHASE = mContext.getString(R.string.premium_product_id_test_purchased);
         }
         else
         {
@@ -69,12 +69,12 @@ public class ChrismAdHelper implements Serializable
                 else
                 {
                     mHelperSetup = true;
-                    /*try {
+                    try {
                         mHelper.queryInventoryAsync(mInventoryListener);
 
                     } catch (IabHelper.IabAsyncInProgressException e) {
                         e.printStackTrace();
-                    }*/
+                    }
                 }
             }
         });
@@ -191,7 +191,7 @@ public class ChrismAdHelper implements Serializable
                     {
                         isPremiumUser = false;
                     }
-                    refreshCallingActivity();
+                    //refreshCallingActivity();
                 }
             };
 

@@ -42,6 +42,7 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
         setContentViewAds();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name_without_chrism);
         setSupportActionBar(toolbar);
 
         //Show the logo in the action bar
@@ -117,7 +118,10 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
         RelativeLayout relativeLayout = findViewById(R.id.relative_layout_main);
         adHelper.createAd(relativeLayout);
 
-        removeAdMenuItem.setVisible(adHelper.showAd());
+        if (removeAdMenuItem != null)
+        {
+            removeAdMenuItem.setVisible(adHelper.showAd());
+        }
     }
 
     /**
@@ -129,9 +133,10 @@ implements LoaderManager.LoaderCallbacks<List<MultiTimer>>
         if (getIntent() != null && getIntent().hasExtra(ChrismAdHelper.IS_PREMIUM_USER))
         {
             showAds = !getIntent().getBooleanExtra(ChrismAdHelper.IS_PREMIUM_USER, true);
+            adHelper = new MultiTimerAdHelper(this, false, false);
             if (showAds)
             {
-                adHelper = new MultiTimerAdHelper(this, true, true);
+                changeDesign();
             }
         }
         else

@@ -82,13 +82,13 @@ public class MultiTimerDialogFragment extends DialogFragment
         dialogView = inflater.inflate(R.layout.dialog_timer, null);
         dialogBuilder.setView(dialogView);
 
-        timerNameView = (EditText) dialogView.findViewById(R.id.dialog_timer_name_edit);
+        timerNameView = dialogView.findViewById(R.id.dialog_timer_name_edit);
 
         dialogView.findViewById(R.id.dialog_timer_name).setVisibility(View.GONE);
         dialogBuilder.setTitle(R.string.create_timer_dialog);
 
         //Define the numberpickers
-        numberPickerHours = (NumberPicker) dialogView.findViewById(R.id.numberpicker_hours);
+        numberPickerHours = dialogView.findViewById(R.id.numberpicker_hours);
         numberPickerHours.setMinValue(0);
         numberPickerHours.setMaxValue(99);
         numberPickerHours.setWrapSelectorWheel(true);
@@ -100,9 +100,9 @@ public class MultiTimerDialogFragment extends DialogFragment
             }
         });
 
-        numberPickerMinutes = (NumberPicker) dialogView.findViewById(R.id.numberpicker_minutes);
+        numberPickerMinutes = dialogView.findViewById(R.id.numberpicker_minutes);
         numberPickerMinutes.setMinValue(0);
-        numberPickerMinutes.setMaxValue(60);
+        numberPickerMinutes.setMaxValue(59);
         numberPickerMinutes.setWrapSelectorWheel(true);
 
         numberPickerMinutes.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -112,9 +112,9 @@ public class MultiTimerDialogFragment extends DialogFragment
             }
         });
 
-        numberPickerSeconds = (NumberPicker) dialogView.findViewById(R.id.numberpicker_seconds);
+        numberPickerSeconds = dialogView.findViewById(R.id.numberpicker_seconds);
         numberPickerSeconds.setMinValue(0);
-        numberPickerSeconds.setMaxValue(60);
+        numberPickerSeconds.setMaxValue(59);
         numberPickerSeconds.setWrapSelectorWheel(true);
 
         numberPickerSeconds.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
